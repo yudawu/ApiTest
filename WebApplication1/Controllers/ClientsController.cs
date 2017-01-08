@@ -23,9 +23,14 @@ namespace WebApi170108.Controllers
         }
 
         [Route("")]
-        public IQueryable<Client> GetClient()
+        [ResponseType(typeof(IQueryable<Client>))]
+        public IHttpActionResult GetClient()
         {
-            return db.Client;
+            if (!Request.IsLocal())
+            {
+                return NotFound();
+            }
+            return Ok(db.Client);
         }
 
         [Route("{id:int}")]
