@@ -12,6 +12,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [RoutePrefix("products")]
     public class ProductsController : ApiController
     {
         private FabricsEntities db = new FabricsEntities();
@@ -22,14 +23,15 @@ namespace WebApplication1.Controllers
         }
 
         // GET: api/Products
+        [Route("")]
         public IQueryable<Product> GetProduct()
         {
             return db.Product;
         }
 
         // GET: products/search/Will
-        [Route("products/search/{name}")]
-        [ResponseType(typeof(Product))]  //回傳為IHttpActionResult時, 需告知回傳型別
+        [Route("search/{name}")]
+        [ResponseType(typeof(Product))]
         public IHttpActionResult GetSearchProduct(string name)
         {
             Product product = db.Product.FirstOrDefault(p => p.ProductName.Contains(name));
@@ -42,7 +44,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: products/5
-        [Route("products/{id:int}")]
+        [Route("{id:int}")]
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
