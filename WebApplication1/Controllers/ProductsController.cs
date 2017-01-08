@@ -86,7 +86,7 @@ namespace WebApplication1.Controllers
 
             var item = db.Product.Find(id);
 
-            if (!String.IsNullOrEmpty(item.ProductName))
+            if (!String.IsNullOrEmpty(product.ProductName))
             {
                 item.ProductName = product.ProductName;
             }
