@@ -27,7 +27,22 @@ namespace WebApplication1.Controllers
             return db.Product;
         }
 
-        // GET: api/Products/5
+        // GET: products/search/Will
+        [Route("products/search/{name}")]
+        [ResponseType(typeof(Product))]  //回傳為IHttpActionResult時, 需告知回傳型別
+        public IHttpActionResult GetSearchProduct(string name)
+        {
+            Product product = db.Product.FirstOrDefault(p => p.ProductName.Contains(name));
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
+        }
+
+        // GET: products/5
+        [Route("products/{id:int}")]
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
