@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using WebApplication1.Models;
 
-namespace WebApi170108.Controllers
+namespace WebApplication1.Controllers
 {
     [RoutePrefix("clients")]
     public class ClientsController : ApiController

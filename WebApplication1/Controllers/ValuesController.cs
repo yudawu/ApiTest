@@ -12,8 +12,8 @@ namespace WebApplication1.Controllers
     public class ValuesController : ApiController
     {
         [Route("geo")]
-        [HttpGet]
-        [HttpPost]
+        [HttpGet][HttpPost]
+        [ValidateModel]
         public IHttpActionResult Get([FromUri]GeoPoint point)
         {
             if (!ModelState.IsValid)
