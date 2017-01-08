@@ -4,12 +4,26 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ValuesController : ApiController
     {
+        [Route("geo")]
+        [HttpGet]
+        [HttpPost]
+        public IHttpActionResult Get([FromUri]GeoPoint point)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok(point);
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {

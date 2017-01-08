@@ -234,6 +234,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Fabrics.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GeoPoint.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Occupation.cs">
       <DependentUpon>Fabrics.tt</DependentUpon>

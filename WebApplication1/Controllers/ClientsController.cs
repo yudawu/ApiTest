@@ -55,16 +55,16 @@ namespace WebApi170108.Controllers
             return Ok(orders.ToList());
         }
 
-        [Route("{id:int}/orders/{*date:datetime}")]
+        [Route("{id:int}/orders/date")]
         [ResponseType(typeof(Order))]
-        public IHttpActionResult GetClientOrdersByDate(int id, DateTime date)
+        [HttpPost]
+        public IHttpActionResult GetClientOrdersByDate(int id, [FromBody]DateTime date)
         {
             var date_begin = date.Date;
             var date_end = date.AddDays(1);
 
             var orders = db.Order.Where(p =>
-            p.ClientId == id &&
-            (
+            p.ClientId == id && (
             p.OrderDate.Value > date_begin &&
             p.OrderDate.Value < date_end
             ));
