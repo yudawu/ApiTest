@@ -44,7 +44,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: products/5
-        [Route("{id:int}")]
+        [Route("{id:int}",Name = "GetProductById")]
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
@@ -134,6 +134,7 @@ namespace WebApplication1.Controllers
 
         // POST: api/Products
         [ResponseType(typeof(Product))]
+        [Route("")]
         public IHttpActionResult PostProduct(Product product)
         {
             if (!ModelState.IsValid)
@@ -144,7 +145,7 @@ namespace WebApplication1.Controllers
             db.Product.Add(product);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = product.ProductId }, product);
+            return CreatedAtRoute("GetProductById", new { id = product.ProductId }, product);
         }
 
         // DELETE: api/Products/5
