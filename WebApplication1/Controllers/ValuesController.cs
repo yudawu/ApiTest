@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -14,6 +15,7 @@ namespace WebApplication1.Controllers
         [Route("geo")]
         [HttpGet][HttpPost]
         [ValidateModel]
+        [EnableCors("http://localhost", "*", "Get,Put")]
         public IHttpActionResult Get([FromUri]GeoPoint point)
         {
             if (!ModelState.IsValid)
