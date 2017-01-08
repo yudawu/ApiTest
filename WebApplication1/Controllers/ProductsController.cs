@@ -75,6 +75,46 @@ namespace WebApplication1.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // Patch: api/Products/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PatchProduct(int id, Product product)
+        {
+            if (id != product.ProductId)
+            {
+                return BadRequest();
+            }
+
+            var item = db.Product.Find(id);
+
+            if (!String.IsNullOrEmpty(item.ProductName))
+            {
+                item.ProductName = product.ProductName;
+            }
+
+            if (product.Active.HasValue)
+            {
+                item.Active = product.Active;
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         // POST: api/Products
         [ResponseType(typeof(Product))]
         public IHttpActionResult PostProduct(Product product)
