@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Security;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -12,6 +13,27 @@ namespace WebApplication1.Controllers
     //[Authorize]
     public class ValuesController : ApiController
     {
+        [Route("login")]
+        public IHttpActionResult PostLogin(string username, string password)
+        {
+            if (username == "Will" && password == "1234")
+            {
+                FormsAuthentication.RedirectFromLoginPage(username, false);
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [Route("logout")]
+        public void Logout()
+        {
+            FormsAuthentication.SignOut();
+        }
+
+        [Authorize]
         [Route("geo")]
         [HttpGet][HttpPost]
         [ValidateModel]
